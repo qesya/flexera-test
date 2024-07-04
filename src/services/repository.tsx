@@ -7,12 +7,16 @@ import { clear, setRepository } from "@/store/repository";
 import { Repository } from "@/types/repository";
 
 type RepositoryContextProps = {
-  selectedRepository: Repository[];
+  selectedRepositories: Repository[];
   setRepository: (repository: Repository[]) => Promise<void>;
   clear: () => Promise<void>;
   repositories: Repository[];
-  fetchRepositories: (page: number) => Promise<void>;
+  fetchRepositories: (params: FetchRepositoriesParams) => Promise<void>;
   loading: boolean;
+};
+
+type FetchRepositoriesParams = {
+  page: number;
 };
 
 const RepositoryContext = createContext<RepositoryContextProps | undefined>(
@@ -23,17 +27,16 @@ export const RepositoryProvider = ({ children }: { children: ReactNode }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [repositories, setRepositories] = useState([]);
-  const { repository: selectedRepository } = useSelector(
+  const { repository: selectedRepositories } = useSelector(
     (e: RootState) => e.repository,
   );
 
-  const fetchRepositories = async (page: number) => {
+  const fetchRepositories = async ({ page }: FetchRepositoriesParams) => {
     setLoading(true);
 
     try {
       const response = await fetch(
-        "https://api.github.com/search/repositories?sort=stars&q=javascript&per_page=10&page=" +
-          page,
+        `https://api.github.com/search/repositories?sort=stars&q=javascript&per_page=10&page=${page}`,
       );
 
       if (!response.ok) {
@@ -64,7 +67,7 @@ export const RepositoryProvider = ({ children }: { children: ReactNode }) => {
       value={{
         repositories,
         fetchRepositories,
-        selectedRepository: selectedRepository || [],
+        selectedRepositories: selectedRepositories || [],
         setRepository: selectRepository,
         clear: emptyRepository,
         loading,

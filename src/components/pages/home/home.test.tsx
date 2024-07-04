@@ -11,7 +11,7 @@ jest.mock("../../../services/repository.tsx", () => ({
 
 const useRepositoryMock = {
   repositories: repositoriesMock,
-  selectedRepository: [],
+  selectedRepositories: [],
   setRepository: jest.fn(),
   fetchRepositories: jest.fn(),
   loading: false,
@@ -42,15 +42,15 @@ describe("HomePage Component", () => {
   test("handles page change", () => {
     render(<HomePage />);
 
-    const paginationButton = screen.getByText("Next"); // Assuming the pagination component renders page numbers as buttons
-    fireEvent.click(paginationButton);
+    const paginationButton = screen.getAllByText("Next"); // Assuming the pagination component renders page numbers as buttons
+    fireEvent.click(paginationButton[0]);
 
-    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith(2);
+    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith({ page: 2 });
   });
 
   test("fetches repositories on initial render", () => {
     render(<HomePage />);
 
-    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith(1); // Initial page is 1
+    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith({ page: 1 }); // Initial page is 1
   });
 });

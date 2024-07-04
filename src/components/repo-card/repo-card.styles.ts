@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   padding: 20px;
   cursor: pointer;
 
+  border: 1px solid rgba(149, 157, 165, 0.2);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition-duration: 0.1s;
 
@@ -37,6 +38,7 @@ export const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  color: black;
 
   span {
     display: block;

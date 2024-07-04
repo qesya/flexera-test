@@ -3,6 +3,7 @@ import { MOBILE } from "@/configs/style";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  background-color: white;
   width: "100%";
   height: "100%";
 
@@ -30,5 +31,5 @@ export const RepoList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding-bottom: 20px;
+  padding: 20px 0;
 `;
