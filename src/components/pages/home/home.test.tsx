@@ -45,12 +45,16 @@ describe("HomePage Component", () => {
     const paginationButton = screen.getAllByText("Next"); // Assuming the pagination component renders page numbers as buttons
     fireEvent.click(paginationButton[0]);
 
-    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith({ page: 2 });
+    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith({
+      page: 2,
+    });
   });
 
   test("fetches repositories on initial render", () => {
     render(<HomePage />);
 
-    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith({ page: 1 }); // Initial page is 1
+    expect(useRepositoryMock.fetchRepositories).toHaveBeenCalledWith({
+      page: 1,
+    }); // Initial page is 1
   });
 });
