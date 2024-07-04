@@ -5,7 +5,7 @@
 - [How to Run](#installation)
 - [Extra](#extra)
 
-## Installation
+## How to Run
 
 To get started with this project, clone the repository and install the dependencies:
 
